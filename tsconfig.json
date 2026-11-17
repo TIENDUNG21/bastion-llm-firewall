@@ -23,6 +23,7 @@
     "packages/*/test/**/*.ts",
     "scripts/**/*.ts",
     "vitest.config.ts",
-    "apps/playground/test/**/*.ts"
+    "apps/playground/test/**/*.ts",
+    "examples/**/*.ts"
   ]
 }

@@ -25,7 +25,9 @@
     "evaluate": "tsx scripts/evaluate.ts",
     "bastion": "node packages/cli/dist/bin.js",
     "check:pages": "node scripts/check-pages-build.mjs",
-    "dev": "npm run dev -w @bastion/playground"
+    "dev": "npm run dev -w @bastion/playground",
+    "bench": "tsx scripts/bench.ts",
+    "example": "tsx examples/express-chat.ts"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
