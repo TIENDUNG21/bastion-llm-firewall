@@ -1,6 +1,6 @@
 /** Pulls the user-controlled text out of common chat-request bodies. */
 
-const PROMPT_FIELDS = ['prompt', 'input', 'query', 'question'] as const;
+const PROMPT_FIELDS = ['prompt', 'message', 'input', 'query', 'question', 'text'] as const;
 /** Turns whose text comes from outside the application: the user and tool results. */
 const SCANNED_ROLES = new Set(['user', 'tool', 'function']);
 
@@ -18,8 +18,8 @@ function contentText(content: unknown): string[] {
 }
 
 /**
- * Default extractor: a plain-text body; the `prompt`, `input`, `query` and
- * `question` fields; and the `user` / `tool` turns of a `messages` array
+ * Default extractor: a plain-text body; the `prompt`, `message`, `input`,
+ * `query`, `question` and `text` fields; and the `user` / `tool` turns of a `messages` array
  * (string content or `{ type: 'text', text }` parts). System and assistant
  * turns are written by the application and are not scanned.
  */

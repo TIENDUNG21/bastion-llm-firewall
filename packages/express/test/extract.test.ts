@@ -4,8 +4,20 @@ import { defaultExtract } from '../src/extract.js';
 describe('defaultExtract', () => {
   it('reads the common single-prompt fields', () => {
     expect(
-      defaultExtract({ prompt: 'a', input: 'b', query: 'c', question: 'd', other: 'x' }),
-    ).toEqual(['a', 'b', 'c', 'd']);
+      defaultExtract({
+        prompt: 'a',
+        message: 'b',
+        input: 'c',
+        query: 'd',
+        question: 'e',
+        text: 'f',
+        other: 'x',
+      }),
+    ).toEqual(['a', 'b', 'c', 'd', 'e', 'f']);
+  });
+
+  it('ignores a message field that is not a string', () => {
+    expect(defaultExtract({ message: { role: 'user', content: 'hi' } })).toEqual([]);
   });
 
   it('reads user and tool messages, including content parts, and skips system and assistant turns', () => {
