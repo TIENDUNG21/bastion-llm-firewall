@@ -11,7 +11,8 @@ export type SecretKind =
   | 'private-key'
   | 'url-credentials'
   | 'assigned-secret'
-  | 'high-entropy';
+  | 'high-entropy'
+  | 'canary';
 
 export type Confidence = 'high' | 'medium' | 'low';
 
