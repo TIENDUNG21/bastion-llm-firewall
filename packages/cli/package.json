@@ -1,0 +1,19 @@
+{
+  "name": "@bastion/cli",
+  "version": "0.1.0",
+  "description": "Command-line scanner and evaluator for Bastion.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "bastion": "./dist/bin.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@bastion/core": "0.1.0"
+  }
+}

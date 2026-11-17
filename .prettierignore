@@ -1,0 +1,10 @@
+node_modules
+dist
+coverage
+.cache
+package-lock.json
+packages/core/src/classifier/model.json
+eval/results.json
+docs/EVALUATION.md
+docs/BENCHMARKS.md
+*.svg
