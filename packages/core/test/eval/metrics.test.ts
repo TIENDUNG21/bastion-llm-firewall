@@ -92,10 +92,11 @@ describe('rocCurve', () => {
     const curve = rocCurve([0, 1, 0, 1, 1], [0.1, 0.9, 0.4, 0.4, 0.7]);
     expect(curve[0]).toMatchObject({ fpr: 0, tpr: 0 });
     expect(curve.at(-1)).toMatchObject({ fpr: 1, tpr: 1 });
-    for (let i = 1; i < curve.length; i++) {
-      expect(curve[i]!.fpr).toBeGreaterThanOrEqual(curve[i - 1]!.fpr);
-      expect(curve[i]!.tpr).toBeGreaterThanOrEqual(curve[i - 1]!.tpr);
-    }
+    curve.slice(1).forEach((point, i) => {
+      const prev = curve[i] ?? point;
+      expect(point.fpr).toBeGreaterThanOrEqual(prev.fpr);
+      expect(point.tpr).toBeGreaterThanOrEqual(prev.tpr);
+    });
   });
 });
 
