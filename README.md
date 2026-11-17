@@ -90,7 +90,7 @@ The rules raised no false alarm on this split, but they only catch the phrasings
 
 ## Limitations
 
-This is one layer of defence, not a solution to prompt injection. A model that follows instructions in its context cannot tell trusted from untrusted text on its own, and a filter in front of it can only recognize attacks that resemble what it was built or trained on. Anyone who can probe Bastion repeatedly will find phrasings it misses. The OWASP Top 10 for LLM Applications lists the mitigations that matter more: least-privilege tools, human confirmation for consequential actions, and keeping untrusted content apart from instructions.
+This is one layer of defense, not a solution to prompt injection. A model that follows instructions in its context cannot tell trusted from untrusted text on its own, and a filter in front of it can only recognize attacks that resemble what it was built or trained on. Anyone who can probe Bastion repeatedly will find phrasings it misses. The OWASP Top 10 for LLM Applications lists the mitigations that matter more: least-privilege tools, human confirmation for consequential actions, and keeping untrusted content apart from instructions.
 
 Known gaps, most of them measured in [docs/EVALUATION.md](docs/EVALUATION.md):
 
