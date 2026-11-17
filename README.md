@@ -5,6 +5,8 @@
 [![CI](https://github.com/TIENDUNG21/bastion-llm-firewall/actions/workflows/ci.yml/badge.svg)](https://github.com/TIENDUNG21/bastion-llm-firewall/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-d4f53c.svg)](LICENSE)
 
+<p align="center"><img src="assets/banner.svg" width="100%" alt="Animated diagram: a normal prompt passes, an instruction-override prompt is blocked, a card number in the reply is redacted"></p>
+
 Bastion is an in-process filter for applications that put a language model behind an HTTP endpoint. It scores each prompt for injection before the model sees it, and scans each response for personal data, credentials and system-prompt leakage before the user sees it. The core is TypeScript with no runtime dependencies, runs in Node and in the browser, and never calls a model.
 
 ```ts
