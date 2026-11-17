@@ -21,7 +21,8 @@
     "build": "npm run build -w @bastion/core && npm run build -w @bastion/express && npm run build -w @bastion/cli",
     "fetch-data": "tsx scripts/fetch-datasets.ts",
     "train": "tsx scripts/train.ts",
-    "evaluate": "tsx scripts/evaluate.ts"
+    "evaluate": "tsx scripts/evaluate.ts",
+    "bastion": "node packages/cli/dist/bin.js"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
