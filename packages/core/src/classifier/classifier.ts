@@ -6,8 +6,11 @@ import type { ClassifierModel } from './model.js';
 /** How much one term pushed the logit (positive = towards "injection"). */
 export interface Contribution {
   term: string;
+  kind: 'char' | 'word' | 'phrase';
   weight: number;
 }
+
+const KINDS = { c: 'char', w: 'word', b: 'phrase' } as const;
 
 export interface ClassifierScore {
   /** Raw model probability. */
@@ -25,11 +28,6 @@ export interface Classifier {
   probability(skel: string): number;
   /** Scores every view and keeps the most suspicious one. */
   score(input: NormalizedInput, options?: { explain?: number }): ClassifierScore;
-}
-
-function displayTerm(term: string): string {
-  const body = term.slice(2);
-  return term.startsWith('c:') ? `"${body}"` : body;
 }
 
 export function createClassifier(model: ClassifierModel): Classifier {
@@ -56,7 +54,8 @@ export function createClassifier(model: ClassifierModel): Classifier {
     norm = Math.sqrt(norm) || 1;
     return hashed
       .map((t) => ({
-        term: displayTerm(t.term),
+        term: t.term.slice(2),
+        kind: KINDS[t.term[0] as keyof typeof KINDS],
         weight: ((weights[t.index] ?? 0) * t.value) / norm,
       }))
       .filter((c) => c.weight !== 0)

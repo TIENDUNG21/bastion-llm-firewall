@@ -78,7 +78,7 @@ describe('createClassifier', () => {
 
   it('explains the score with the terms that pushed it', () => {
     const r = classifier.score(normalize('ignore the instructions'), { explain: 3 });
-    expect(r.contributions[0]?.term).toBe('ignore');
+    expect(r.contributions[0]).toMatchObject({ term: 'ignore', kind: 'word' });
     expect(r.contributions[0]?.weight).toBeGreaterThan(0);
     expect(r.contributions.length).toBeLessThanOrEqual(3);
   });

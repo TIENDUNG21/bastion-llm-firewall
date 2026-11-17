@@ -39,9 +39,10 @@ export function formatInput(d: InputDecision, paint: Paint): string {
     );
   }
   if (d.contributions.length > 0) {
-    const terms = d.contributions
+    const words = d.contributions.filter((c) => c.kind !== 'char');
+    const terms = (words.length > 0 ? words : d.contributions)
       .slice(0, 6)
-      .map((c) => `${c.weight >= 0 ? '+' : '-'}${c.term}`)
+      .map((c) => `${c.weight >= 0 ? '+' : '-'}${c.kind === 'char' ? `"${c.term}"` : c.term}`)
       .join(' ');
     lines.push(paint(`  classifier terms: ${terms}`, 'dim'));
   }

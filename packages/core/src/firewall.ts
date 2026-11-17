@@ -102,7 +102,7 @@ export function createFirewall(options: FirewallOptions = {}): Firewall {
     const active = detectors.filter((d) => policy.detectors[d.id] !== false);
     const heuristics = runHeuristics(normalized, active);
     const ml =
-      policy.classifier && classifier ? classifier.score(normalized, { explain: 8 }) : null;
+      policy.classifier && classifier ? classifier.score(normalized, { explain: 24 }) : null;
     const score = Math.max(heuristics.score, ml?.calibrated ?? 0);
     const action: InputAction =
       score >= policy.blockAt ? 'block' : score >= policy.flagAt ? 'flag' : 'allow';
