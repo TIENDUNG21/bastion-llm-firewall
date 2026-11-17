@@ -1,6 +1,6 @@
 {
   "name": "@bastion/playground",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "description": "Client-side playground for Bastion. Never calls a network API.",
   "license": "MIT",
@@ -11,6 +11,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@bastion/core": "0.1.0"
+    "@bastion/core": "1.0.0"
   }
 }

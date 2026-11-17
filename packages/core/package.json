@@ -1,6 +1,6 @@
 {
   "name": "@bastion/core",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Prompt-injection detection, output scanning and policy engine. Zero runtime dependencies; runs in Node and the browser.",
   "license": "MIT",
   "type": "module",
