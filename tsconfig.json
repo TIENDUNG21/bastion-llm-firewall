@@ -2,19 +2,11 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "noEmit": true,
-    "lib": [
-      "ES2022"
-    ],
-    "types": [
-      "node"
-    ],
+    "lib": ["ES2022"],
+    "types": ["node"],
     "paths": {
-      "@bastion/core": [
-        "./packages/core/src/index.ts"
-      ],
-      "@bastion/express": [
-        "./packages/express/src/index.ts"
-      ]
+      "@bastion/core": ["./packages/core/src/index.ts"],
+      "@bastion/express": ["./packages/express/src/index.ts"]
     }
   },
   "include": [
