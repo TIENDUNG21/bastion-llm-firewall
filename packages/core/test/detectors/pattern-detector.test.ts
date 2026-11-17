@@ -41,4 +41,19 @@ describe('createPatternDetector', () => {
     expect(finding?.score).toBe(0.5);
     expect(finding?.evidence).toHaveLength(1);
   });
+
+  it('scores two rules that match the same text but lists the evidence once', () => {
+    const detector = createPatternDetector({
+      id: 'demo',
+      category: 'role-play',
+      description: 'demo',
+      rules: [
+        { id: 'a', pattern: /\bbanana\b/, weight: 0.5, explain: 'a' },
+        { id: 'b', pattern: /\bbanana\b/, weight: 0.5, explain: 'b' },
+      ],
+    });
+    const finding = detector.detect(normalize('banana'), []);
+    expect(finding?.score).toBeCloseTo(0.75);
+    expect(finding?.evidence).toHaveLength(1);
+  });
 });

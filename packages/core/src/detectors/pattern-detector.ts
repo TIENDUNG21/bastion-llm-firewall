@@ -48,7 +48,11 @@ export function createPatternDetector(def: PatternDetectorDefinition): InputDete
       if (hits.size === 0) return null;
       const matched = def.rules.filter((r) => hits.has(r.id));
       const top = matched.reduce((a, b) => (b.weight > a.weight ? b : a));
-      const evidence = [...hits.values()];
+      const evidence = [...hits.values()].filter(
+        (e, i, all) =>
+          all.findIndex((o) => o.view === e.view && o.index === e.index && o.match === e.match) ===
+          i,
+      );
       const hiddenIn = [...new Set(evidence.map((e) => e.view).filter((v) => v !== 'primary'))];
       const where = hiddenIn.length > 0 ? ` (found in ${hiddenIn.join(', ')}-decoded text)` : '';
       return {
