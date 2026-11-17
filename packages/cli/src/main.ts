@@ -1,4 +1,5 @@
 import { VERSION } from '@bastion/core';
+import { evalCommand } from './commands/eval.js';
 import { redactCommand } from './commands/redact.js';
 import { scanCommand } from './commands/scan.js';
 import { CliError } from './io.js';
@@ -9,6 +10,7 @@ export const HELP = `Usage: bastion <command> [options]
 Commands:
   scan [text]        check a prompt (or, with --output, a model response)
   redact [text]      replace personal data and secrets in text
+  eval <file>        measure precision, recall, F1 and ROC-AUC on labelled data
 
 Run "bastion <command> --help" for the options of a command.
 Global: --help, --version
@@ -19,6 +21,7 @@ type Command = (argv: string[], io: Io) => Promise<number>;
 const COMMANDS: Readonly<Record<string, Command>> = {
   scan: scanCommand,
   redact: redactCommand,
+  eval: evalCommand,
 };
 
 /** Runs the CLI and returns the exit code. */
