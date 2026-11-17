@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Bastion playground: paste a prompt or a model response and see each detector of the LLM firewall fire, with explanations. Runs entirely in your browser."
+    />
+    <title>Bastion LLM Firewall · Playground</title>
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a class="brand" href="./" aria-label="Bastion playground home">
+        <svg viewBox="0 0 64 64" width="28" height="28" aria-hidden="true">
+          <path
+            d="M32 5 L59 32 L32 59 L5 32 Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="6"
+          />
+          <rect x="24" y="24" width="16" height="16" fill="currentColor" />
+        </svg>
+        <span>Bastion</span>
+      </a>
+      <p class="tagline">A firewall for LLM apps. Stops prompt injection and data leaks.</p>
+      <nav class="tabs" role="tablist" aria-label="Mode">
+        <button
+          type="button"
+          role="tab"
+          id="tab-input"
+          aria-controls="panel-input"
+          aria-selected="true"
+        >
+          Prompt check
+        </button>
+        <button
+          type="button"
+          role="tab"
+          id="tab-output"
+          aria-controls="panel-output"
+          aria-selected="false"
+        >
+          Response check
+        </button>
+      </nav>
+      <a class="repo" href="https://github.com/TIENDUNG21/bastion-llm-firewall">Source</a>
+    </header>
+
+    <main>
+      <section id="panel-input" class="panel" role="tabpanel" aria-labelledby="tab-input">
+        <div class="editor">
+          <label for="prompt" class="field-label">Prompt from a user</label>
+          <textarea id="prompt" rows="9" spellcheck="false"></textarea>
+          <div class="samples" id="input-samples" aria-label="Examples"></div>
+          <fieldset class="policy">
+            <legend>Policy</legend>
+            <label for="flag-at">Flag at <output id="flag-value" for="flag-at">0.50</output></label>
+            <input type="range" id="flag-at" min="0.05" max="1" step="0.05" value="0.5" />
+            <label for="block-at"
+              >Block at <output id="block-value" for="block-at">0.80</output></label
+            >
+            <input type="range" id="block-at" min="0.05" max="1" step="0.05" value="0.8" />
+            <label class="check"
+              ><input type="checkbox" id="use-classifier" checked /> Use the classifier</label
+            >
+          </fieldset>
+          <p class="note">
+            Everything runs in this page. Nothing you type is sent anywhere, and no language model
+            is called.
+          </p>
+        </div>
+        <div class="results" aria-live="polite">
+          <div class="verdict" id="input-verdict"></div>
+          <section class="card">
+            <h2>Detectors</h2>
+            <ol class="detectors" id="detectors"></ol>
+          </section>
+          <section class="card">
+            <h2>Classifier</h2>
+            <div id="classifier"></div>
+          </section>
+          <section class="card">
+            <h2>What the detectors read</h2>
+            <p class="hint">
+              The input after normalization: case and accents folded, look-alike letters and
+              leetspeak mapped, invisible characters removed, and encoded payloads decoded into
+              extra views.
+            </p>
+            <div id="signals"></div>
+            <div id="views"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="panel-output" class="panel" role="tabpanel" aria-labelledby="tab-output" hidden>
+        <div class="editor">
+          <label for="response" class="field-label">Response from the model</label>
+          <textarea id="response" rows="9" spellcheck="false"></textarea>
+          <div class="samples" id="output-samples" aria-label="Examples"></div>
+          <label for="canary" class="field-label">Canary token in your system prompt</label>
+          <div class="row">
+            <input type="text" id="canary" spellcheck="false" autocomplete="off" />
+            <button type="button" id="new-canary">New</button>
+          </div>
+          <label for="system-prompt" class="field-label"
+            >System prompt (optional, for leak detection)</label
+          >
+          <textarea id="system-prompt" rows="4" spellcheck="false"></textarea>
+          <p class="note">
+            Everything runs in this page. Nothing you type is sent anywhere, and no language model
+            is called.
+          </p>
+        </div>
+        <div class="results" aria-live="polite">
+          <div class="verdict" id="output-verdict"></div>
+          <section class="card">
+            <h2>Findings</h2>
+            <ul class="findings" id="findings"></ul>
+          </section>
+          <section class="card">
+            <h2>Highlighted</h2>
+            <pre class="text" id="highlighted"></pre>
+          </section>
+          <section class="card">
+            <h2>What the user would receive</h2>
+            <pre class="text" id="delivered"></pre>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>MIT licensed.</span>
+      <a href="https://github.com/TIENDUNG21/bastion-llm-firewall/blob/main/docs/EVALUATION.md"
+        >How well it works</a
+      >
+      <a href="https://github.com/TIENDUNG21/bastion-llm-firewall/blob/main/docs/ARCHITECTURE.md"
+        >How it works</a
+      >
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
